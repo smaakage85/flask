@@ -6,6 +6,11 @@ app = Flask(__name__)
 def home():
     return 'heeeellloow world!'
 
+
+@app.route('/multi/<int:num>', methods=['GET'])
+def get_multiply10(num):
+    return jsonify({'result': num * 10})
+    
 if __name__ == '__main__':
     app.run()
 
@@ -23,9 +28,6 @@ if __name__ == '__main__':
 #     else:
 #         return jsonify({'about':'Hello World!'})
 
-@app.route('/multi/<int:num>', methods=['GET'])
-def get_multiply10(num):
-    return jsonify({'result': num * 10})
 
 # app.run(debug=True)
 
