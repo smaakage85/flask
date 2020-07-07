@@ -2,10 +2,10 @@ from flask import Flask, jsonify, request
     
 app = Flask(__name__)
 
-from pkg.models import train_iris_model
+# from pkg.models import train_iris_model
 
 # train model
-model = train_iris_model()
+# model = train_iris_model()
 
 @app.route('/')
 def home():
@@ -24,18 +24,18 @@ def index():
     else:
         return jsonify({'about':'Hello World!'})
 
-@app.route('/predict/', methods=['GET', 'POST'])
-def index():
-    data_json = request.get_json()
-    if (request.method == 'POST'):
-        some_json = request.get_json()
-        return jsonify({'you sent': some_json}), 201
-    else:
-        from sklearn.datasets import load_iris
-        X, y = load_iris(return_X_y=True)
-        new_samples = X[(0,50,70),:]
-        preds = model.predict(new_samples) 
-    return jsonify({'predictions': preds})
+# @app.route('/predict/', methods=['GET', 'POST'])
+# def index():
+#     data_json = request.get_json()
+#     if (request.method == 'POST'):
+#         some_json = request.get_json()
+#         return jsonify({'you sent': some_json}), 201
+#     else:
+#         from sklearn.datasets import load_iris
+#         X, y = load_iris(return_X_y=True)
+#         new_samples = X[(0,50,70),:]
+#         preds = model.predict(new_samples) 
+#     return jsonify({'predictions': preds})
 
 if __name__ == '__main__':
     app.run()
