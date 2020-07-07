@@ -2,10 +2,10 @@ from flask import Flask, jsonify, request
     
 app = Flask(__name__)
 
-# from pkg.models import train_iris_model
+from pkg.models import train_iris_model
 
 # train model
-# model = train_iris_model()
+model = train_iris_model()
 
 @app.route('/')
 def home():
