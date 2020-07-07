@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
-    
+import numpy as np
+
 app = Flask(__name__)
 
 from pkg.models import train_iris_model
@@ -25,17 +26,20 @@ def index():
         return jsonify({'about':'Hello World!'})
 
 @app.route('/predict/', methods=['GET', 'POST'])
-def index():
+def predict():
     data_json = request.get_json()
     if (request.method == 'POST'):
-        some_json = request.get_json()
-        return jsonify({'you sent': some_json}), 201
+        samples = request.get_json()
+        samples = [np.array(list(obs.values()), ndmin = 2) for obs in samples]
+        samples = np.concatenate(samples, axis = 0)
     else:
         from sklearn.datasets import load_iris
         X, y = load_iris(return_X_y=True)
-        new_samples = X[(0,50,70),:]
-        preds = model.predict(new_samples) 
-        return jsonify({'predictions': preds})
+        samples = X[(0,50,70),:]
+         
+    preds = model.predict(samples)
+    preds = preds.tolist()
+    return jsonify({'predictions': preds})
 
 if __name__ == '__main__':
     app.run()
@@ -50,4 +54,25 @@ if __name__ == '__main__':
 
 # curl http://127.0.0.1:5000/
 # curl http://127.0.0.1:5000/multi/10
-# curl -H "Content-Type: application/json" -X POST -d "{\"name\":\"xyz\", \"address\":\"address xyz\"}" https://larsk-flask.herokuapp.com/json/
+# curl -H "Content-Type: application/json" -X POST -d "{\"x1\":5.1, \"x2\":3.5, \"x3\":1.4, \"x4\":0.2}" http://127.0.0.1:5000/json/
+# curl -H "Content-Type: application/json" -X POST -d "[{\"x1\":5.1, \"x2\":3.5, \"x3\":1.4, \"x4\":0.2}]" http://127.0.0.1:5000/predict/
+# curl -H "Content-Type: application/json" -X POST -d "[{\"x1\":5.1, \"x2\":3.5, \"x3\":1.4, \"x4\":0.2}, {\"x1\":6.2, \"x2\":3.4, \"x3\":5.4, \"x4\":2.3}]" http://127.0.0.1:5000/predict/
+
+
+# data_json = """[{ 
+#     \"x1\" : 5.1,
+#     \"x2\" : 3.5,
+#     \"x3\" : 1.4,
+#     \"x4\" : 0.2
+# },
+# { 
+#     \"x1\" : 6.2,
+#     \"x2\" : 3.4,
+#     \"x3\" : 5.4,
+#     \"x4\" : 2.3
+# }]"""
+
+# data_json = json.loads(data_json)
+# arr = [np.array(list(obs.values()), ndmin = 2) for obs in data_json]
+# arr = np.concatenate(arr, axis = 0)
+
