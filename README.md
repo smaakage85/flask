@@ -1,6 +1,8 @@
 # Iris Model App
 
-Try calling the app:
+Welcome to this beautiful  app.
+
+Try calling it:
 
 curl -H "Content-Type: application/json" -X POST -d "[{\"x1\":5.1, \"x2\":3.5, \"x3\":1.4, \"x4\":0.2}]" https://larsk-flask.herokuapp.com/predict/
 
