@@ -1,6 +1,4 @@
 from flask import Flask, jsonify, request
-import numpy as np
-
 app = Flask(__name__)
 
 # instantiate and build model
@@ -12,16 +10,10 @@ model.build_model()
 def home():
     return 'Welcome to this wonderful app!'
 
-@app.route('/predict/', methods=['GET', 'POST'])
+@app.route('/predict/', methods=['POST'])
 def predict():
-    data_json = request.get_json()
-    if (request.method == 'POST'):
-        X = request.get_json()
-        X = model.parse_input(X)
-    else:
-        from sklearn.datasets import load_iris
-        X, y = load_iris(return_X_y=True)
-         
+    X = request.get_json()
+    X = model.parse_input(X)     
     preds = model.predict(X)
     preds_json = model.parse_output(preds)
     return jsonify(preds_json)
@@ -29,6 +21,7 @@ def predict():
 if __name__ == '__main__':
     app.run()
 
+# example calls:
 # curl http://127.0.0.1:5000/
 # curl http://127.0.0.1:5000/multi/10
 # curl -H "Content-Type: application/json" -X POST -d "{\"x1\":5.1, \"x2\":3.5, \"x3\":1.4, \"x4\":0.2}" http://127.0.0.1:5000/json/
