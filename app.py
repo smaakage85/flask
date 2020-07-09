@@ -6,14 +6,14 @@ os.system('pip install --upgrade irismodel')
 os.system('rm -rf pkg')
 
 # instantiate and build model
-from pkg.models import Model
+import pkg
 
-model = Model()
+model = pkg.models.Model()
 model.build_model()
 
 @app.route('/')
 def home():
-    return 'Welcome to this wonderful app!'
+    return pkg.__file__
 
 @app.route('/predict/', methods=['POST'])
 def predict():
