@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="irismodel", 
-    version="0.0.3",
+    version="0.0.4",
     author="Lars Kjeldgaard",
     author_email="lars_kjeldgaard@hotmail.com",
     description="Model for Iris Dataset",

@@ -6,17 +6,16 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.6, 3.7, 3.8]
 
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
+        python-version: '3.x'
+    - name: Display Python version
+      run: python -c "import sys; print(sys.version)"
+    - name: Install package and dependencies
       run: |
         python -m pip install --upgrade pip
         pip install setuptools wheel twine
@@ -26,6 +25,7 @@ jobs:
         pip install pytest
         pytest -v 
     - name: Build and publish
+      if: github.ref == 'refs/heads/master'
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
