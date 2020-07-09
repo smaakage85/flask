@@ -2,8 +2,8 @@ from flask import Flask, jsonify, request
 app = Flask(__name__)
 
 # instantiate and build model
-from pkg.models import ModelIris
-model = ModelIris()
+from pkg.models import Model
+model = Model()
 model.build_model()
 
 @app.route('/')
