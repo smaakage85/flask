@@ -16,11 +16,6 @@ def test_predict_type():
 
 def test_predict_length():
     assert len(preds)==len(X)
-
-def test_failure():
-    assert 1+1==3
-
-
     
 
     
