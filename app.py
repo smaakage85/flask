@@ -1,6 +1,10 @@
 from flask import Flask, jsonify, request
 app = Flask(__name__)
 
+import os
+os.system('pip install --upgrade irismodel')
+os.system('rm -rf pkg')
+
 # instantiate and build model
 from pkg.models import Model
 
