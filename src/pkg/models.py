@@ -7,9 +7,13 @@ class Model:
       from sklearn.datasets import load_iris
       X, y = load_iris(return_X_y = True)
       return X, y
+
+  def format_input(self, X):
+      return X
   
   def fit_model(self, X, y):
       from sklearn.neighbors import KNeighborsClassifier
+      X = self.format_input(X)
       model = KNeighborsClassifier()
       model.fit(X, y)
       return model
@@ -21,6 +25,7 @@ class Model:
       return "Model was successfully build"
       
   def predict(self, X):
+      X = self.format_input(X)
       model = self.model
       preds = model.predict(X)
       return preds
