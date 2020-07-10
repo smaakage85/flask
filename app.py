@@ -1,19 +1,15 @@
 from flask import Flask, jsonify, request
 app = Flask(__name__)
 
-import os
-os.system('pip install --upgrade irismodel')
-os.system('rm -rf pkg')
-
 # instantiate and build model
-import pkg
+from pkg.models import Model
 
-model = pkg.models.Model()
+model = Model()
 model.build_model()
 
 @app.route('/')
 def home():
-    return pkg.__file__
+    return "Welcome to this beautiful app!"
 
 @app.route('/predict/', methods=['POST'])
 def predict():

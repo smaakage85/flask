@@ -5,13 +5,14 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="irismodel", 
-    version="0.0.7",
+    version="0.0.8",
     author="Lars Kjeldgaard",
     author_email="lars_kjeldgaard@hotmail.com",
-    description="Model for Iris Dataset",
+    description="Slim Iris Model",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(where='src'),
+    package_dir={'': 'src'},
     install_requires=[
         'sklearn',
         'numpy'
