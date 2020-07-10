@@ -7,9 +7,13 @@ from pkg.models import Model
 model = Model()
 model.build_model()
 
+# check version
+import pkg_resources
+vrs = pkg_resources.get_distribution('irismodel').version
+
 @app.route('/')
 def home():
-    return "Welcome to this beautiful app!"
+    return vrs
 
 @app.route('/predict/', methods=['POST'])
 def predict():

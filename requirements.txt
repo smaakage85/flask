@@ -1,5 +1,6 @@
 # model package (including version number) to expose through REST-API
-irismodel==0.0.8
+irismodel==0.0.9
 # app requirements
 Flask>=1.1.2
 gunicorn>=20.0.4
+setuptools>=49.1.0
