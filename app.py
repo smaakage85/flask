@@ -11,9 +11,14 @@ model.build_model()
 import pkg_resources
 vrs = pkg_resources.get_distribution('irismodel').version
 
+welcome = """
+        Try calling the app (Windows): 
+        curl -H "Content-Type: application/json" -X POST -d "[{\\"x1\\":5.1, \\"x2\\":3.5, \\"x3\\":1.4, \\"x4\\":0.2}, {\\"x1\\":6.2, \\"x2\\":3.4, \\"x3\\":5.4, \\"x4\\":2.3}]" https://larsk-flask.herokuapp.com/predict/
+          """
+
 @app.route('/')
 def home():
-    return vrs
+    return welcome
 
 @app.route('/predict/', methods=['POST'])
 def predict():
