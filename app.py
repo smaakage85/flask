@@ -21,7 +21,7 @@ def predict():
     X = model.parse_input(X)     
     preds = model.predict(X)
     preds_json = model.parse_output(preds)
-    return jsonify(preds_json)
+    return jsonify({'model_version': vrs}, preds_json)
 
 if __name__ == '__main__':
     app.run()
