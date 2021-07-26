@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="irismodel", 
-    version="0.0.10",
+    name="newspick", 
+    version="0.0.1",
     author="Lars Kjeldgaard",
     author_email="lars_kjeldgaard@hotmail.com",
     description="Slim Iris Model",
